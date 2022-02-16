@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Device;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule;
 class DeviceController extends Controller
 {
     /**
@@ -14,7 +14,10 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        //
+        $all_devices = Device::all();
+        return view("crud.index", [
+            'devices' => $all_devices
+        ]);
     }
 
     /**
@@ -24,7 +27,7 @@ class DeviceController extends Controller
      */
     public function create()
     {
-        //
+        return view("crud.add-device");
     }
 
     /**
@@ -35,7 +38,21 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:devices|max:40',
+            'status'=> ['required',Rule::in([0,1])]
+        ]);
+        $device = new Device();
+
+        $device->name = $request->name;
+        $device->status = $request->status;
+
+        $device->save();
+
+        // setting flag message
+        $request->session()->flash("success", "Device has been created");
+
+        return redirect("device");
     }
 
     /**
