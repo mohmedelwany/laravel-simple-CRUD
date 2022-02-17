@@ -34,7 +34,14 @@
                         </td>
                         <td>
                             <a href="{{route('device.edit', $item->id)}}" class="btn btn-info">Edit</a>
-                            <a href="{{route('device.destroy', $item->id)}}" class="btn btn-danger">Delete</a>
+                            <a href="#" onClick="
+                            if(confirm('Are you sure want to delete?')){
+                                $('#frm-delete-data-{{$item->id}}').submit();
+                            }" class="btn btn-danger">Delete</a>
+                            <form action="{{ route('device.destroy', $item->id) }}" id="frm-delete-data-{{$item->id}}" method="post">
+                                @csrf
+                                @method("delete")
+                            </form>
                         </td>
                     </tr>
                 @endforeach

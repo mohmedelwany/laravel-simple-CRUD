@@ -14,7 +14,7 @@ use App\http\Controllers\DeviceController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect("device");
 });
 
 Route::resource("device", DeviceController::class);
