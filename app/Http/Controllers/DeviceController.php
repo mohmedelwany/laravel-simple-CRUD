@@ -74,7 +74,9 @@ class DeviceController extends Controller
      */
     public function edit(Device $device)
     {
-        //
+        return view("crud.edit-device", [
+            'device' => $device
+        ]);
     }
 
     /**
@@ -86,7 +88,14 @@ class DeviceController extends Controller
      */
     public function update(Request $request, Device $device)
     {
-        //
+        $device->name = $request->name;
+        $device->status = $request->status;
+
+        $device->save();
+
+        $request->session()->flash("success", "Device has been updated successfully");
+
+        return redirect("device");
     }
 
     /**

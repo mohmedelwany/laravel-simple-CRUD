@@ -26,8 +26,11 @@
                         <td>{{$item->id}}</td>
                         <td>{{ucwords($item->name)}}</td>
                         <td>
-                            {{-- <button class="btn btn-success">Active</button> --}}
-                            {{$item->status}}
+                            @if($item->status == 1)
+                                <button class="btn btn-success">Active</button>
+                            @else
+                                <button class="btn btn-danger">Inactive</button>
+                            @endif
                         </td>
                         <td>
                             <a href="{{route('device.edit', $item->id)}}" class="btn btn-info">Edit</a>
