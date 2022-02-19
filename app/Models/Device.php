@@ -11,31 +11,44 @@ class Device extends Model
     use HasFactory;
     public $timestamps = false;
 
-    public static function boot() {
-        parent::boot();
+    /**
+     * Model events Method No.2
+     * using listeners and events
+     */
+    protected $dispatchesEvents = [
+        "creating" => \App\Events\DeviceCreatingEvent::class,
+        "created" => \App\Events\DeviceCreatedEvent::class,
+    ];
 
-        static::creating(function ($item) {
-            Log::info("creating event fired ". $item);
-        });
+    /**
+     * Model events Method No.1
+     * using model events by boot
+     */
+    // public static function boot() {
+    //     parent::boot();
 
-        static::created(function ($item) {
-            Log::info("Created event fired ". $item);
-        });
+    //     static::creating(function ($item) {
+    //         Log::info("creating event fired ". $item);
+    //     });
 
-        static::updating(function ($item) {
-            Log::info("Updating event fired ". $item);
-        });
+    //     static::created(function ($item) {
+    //         Log::info("Created event fired ". $item);
+    //     });
 
-        static::updated(function ($item) {
-            Log::info("Updated event fired ". $item );
-        });
+    //     static::updating(function ($item) {
+    //         Log::info("Updating event fired ". $item);
+    //     });
 
-        static::deleting(function ($item) {
-            Log::info("Deleting event fired ". $item);
-        });
+    //     static::updated(function ($item) {
+    //         Log::info("Updated event fired ". $item );
+    //     });
 
-        static::deleted(function ($item) {
-            Log::info("Deleted event fired ". $item);
-        });
-    }
+    //     static::deleting(function ($item) {
+    //         Log::info("Deleting event fired ". $item);
+    //     });
+
+    //     static::deleted(function ($item) {
+    //         Log::info("Deleted event fired ". $item);
+    //     });
+    // }
 }
