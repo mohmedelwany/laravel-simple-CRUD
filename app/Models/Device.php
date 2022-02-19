@@ -15,10 +15,10 @@ class Device extends Model
      * Model events Method No.2
      * using listeners and events
      */
-    protected $dispatchesEvents = [
-        "creating" => \App\Events\DeviceCreatingEvent::class,
-        "created" => \App\Events\DeviceCreatedEvent::class,
-    ];
+    // protected $dispatchesEvents = [
+    //     "creating" => \App\Events\DeviceCreatingEvent::class,
+    //     "created" => \App\Events\DeviceCreatedEvent::class,
+    // ];
 
     /**
      * Model events Method No.1
